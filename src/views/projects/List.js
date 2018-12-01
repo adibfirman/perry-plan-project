@@ -1,13 +1,19 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProjectSummary = React.lazy(() => import('./Summary'))
 
 const ProjectList = ({ projects }) => (
   <div className="project-list section">
-    { projects.map(item => (
+    { projects && projects.map(item => (
+      <Link
+        key={item.id}
+        to={'/project/' + item.id}>
         <ProjectSummary
           title={item.title}
-          key={item.id} />
+          firstName={item.authorFirstName}
+          lastName={item.authorLastName} />
+      </Link>
       )) }
   </div>
 )

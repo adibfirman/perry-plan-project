@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 const Notification = React.lazy(() => import('./Notification'))
 const ProjectList = React.lazy(() => import('../projects/List'))
@@ -26,10 +28,13 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
-  const { project } = state
+  const { firestore } = state
   return {
-    listProject: project.projects
+    listProject: firestore.ordered.projects
   }
 }
 
-export default connect(mapStateToProps)(Dashboard)
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect(['projects'])
+)(Dashboard)

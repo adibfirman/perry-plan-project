@@ -7,7 +7,8 @@ export const createProject = project => async (dispatch, getState, { getFirebase
     await firestore.collection('projects').add({
       ...project,
       authorFirstName: 'Adib',
-      authorLastName: 'Firman'
+      authorLastName: 'Firman',
+      createdAt: new Date()
     })
 
     dispatch({ type: CREATE_PROJECT, project })
