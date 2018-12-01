@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { signIn } from '../../config/stores/actions/auth';
 
 class SignIn extends PureComponent {
 
@@ -15,11 +17,12 @@ class SignIn extends PureComponent {
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log(this.state)
+    this.props.goSignin(this.state)
   }
 
   render() {
     const { email, password } = this.state
+    const { errorMsg } = this.props
 
     return (
       <div className="container">
@@ -43,6 +46,7 @@ class SignIn extends PureComponent {
           </div>
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Login</button>
+            { errorMsg && <div className="center red-text">{errorMsg}</div> }
           </div>
         </form>
       </div>
@@ -51,4 +55,18 @@ class SignIn extends PureComponent {
 
 }
 
-export default SignIn
+const mapStateToProps = state => {
+  const { auth } = state
+  
+  return {
+    errorMsg: auth.authError
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    goSignin: creds => dispatch(signIn(creds))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
