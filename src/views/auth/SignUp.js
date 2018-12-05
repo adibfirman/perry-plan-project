@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { WithUserLoggedIn } from '../../HOC';
+import { signUp } from '../../config/stores/actions/auth';
 
 class SignUp extends PureComponent {
 
@@ -19,11 +22,12 @@ class SignUp extends PureComponent {
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log(this.state)
+    this.props.signUp(this.state)
   }
 
   render() {
     const { email, password, firstName, lastName } = this.state
+    const { errorText } = this.props
 
     return (
       <div className="container">
@@ -63,6 +67,7 @@ class SignUp extends PureComponent {
           </div>
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Register</button>
+            { errorText && <div className="center red-text">{errorText}</div> }
           </div>
         </form>
       </div>
@@ -71,4 +76,21 @@ class SignUp extends PureComponent {
 
 }
 
-export default WithUserLoggedIn()(SignUp)
+const mapStateToProps = state => {
+  const { auth } = state
+
+  return {
+    errorText: auth.error.signup
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signUp: dataUser => dispatch(signUp(dataUser))
+  }
+}
+
+export default compose(
+  WithUserLoggedIn(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(SignUp)
