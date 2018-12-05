@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-// action reducer
+import { WithUserNotLoggedIn } from '../../HOC';
 import { createProject } from '../../config/stores/actions/projects';
 
 class ProjectCreate extends PureComponent {
@@ -61,4 +62,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(ProjectCreate)
+export default compose(
+  connect(null, mapDispatchToProps),
+  WithUserNotLoggedIn()
+)(ProjectCreate)

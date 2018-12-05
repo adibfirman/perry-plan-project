@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+
 import { signIn } from '../../config/stores/actions/auth';
+import { WithUserLoggedIn } from '../../HOC';
 
 class SignIn extends PureComponent {
 
@@ -69,4 +72,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  WithUserLoggedIn()
+)(SignIn)

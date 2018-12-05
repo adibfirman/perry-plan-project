@@ -16,6 +16,6 @@ export default createStore(RootReducers,
   compose(
     applyMiddleware(...middleware),
     reduxFirestore(FirebaseConfig),
-    reactReduxFirebase(FirebaseConfig)
+    reactReduxFirebase(FirebaseConfig, { attachAuthIsReady: true })
   )
 )

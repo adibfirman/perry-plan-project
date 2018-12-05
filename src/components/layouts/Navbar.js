@@ -5,24 +5,26 @@ import { connect } from 'react-redux';
 import SignInLinks from './SignInLinks';
 import SignOutLinks from './SignOutLinks';
 
-const Navbar = () => {
+const Navbar = props => {
+  const { isLogin } = props
+  const links = isLogin ? <SignOutLinks /> : <SignInLinks />
+
   return (
     <nav className="nav-wrapper grey darken-3">
       <div className="container">
         <Link
           to="/"
           className="brand-logo">MarioPlan</Link>
-        <SignInLinks />
-        <SignOutLinks />
+        {links}
       </div>
     </nav>
   )
 }
 
 const mapStateToProps = state => {
-  console.log(state)
+  const { firebase } = state
 
-  return {}
+  return { isLogin: firebase.auth.isEmpty }
 }
 
 export default connect(mapStateToProps)(Navbar)

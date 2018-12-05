@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 
+import { WithUserLoggedIn } from '../../HOC';
+
 class SignUp extends PureComponent {
 
   state = {
@@ -69,4 +71,4 @@ class SignUp extends PureComponent {
 
 }
 
-export default SignUp
+export default WithUserLoggedIn()(SignUp)

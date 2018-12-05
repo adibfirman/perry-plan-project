@@ -1,12 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
 import Routes from './config/routes';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
+import ReduxStore from './config/stores';
 
-ReactDOM.render(<Routes />, document.getElementById('root'));
+const App = () => (
+  <Provider store={ReduxStore}>
+    <Routes />
+  </Provider>
+)
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReduxStore.firebaseAuthIsReady.then(() => {
+  ReactDOM.render(<App />, document.getElementById('root'));
+  
+  // If you want your app to work offline and load faster, you can change
+  // unregister() to register() below. Note this comes with some pitfalls.
+  // Learn more about service workers: http://bit.ly/CRA-PWA
+  serviceWorker.unregister();
+})
+

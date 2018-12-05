@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
+import { WithUserNotLoggedIn } from '../../HOC';
+
 const Notification = React.lazy(() => import('./Notification'))
 const ProjectList = React.lazy(() => import('../projects/List'))
 
@@ -36,5 +38,6 @@ const mapStateToProps = state => {
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect(['projects'])
+  firestoreConnect(['projects']),
+  WithUserNotLoggedIn()
 )(Dashboard)
