@@ -16,6 +16,6 @@ export default createStore(RootReducers,
   compose(
     applyMiddleware(...middleware),
     reduxFirestore(FirebaseConfig),
-    reactReduxFirebase(FirebaseConfig, { attachAuthIsReady: true })
+    reactReduxFirebase(FirebaseConfig, { useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true })
   )
 )
