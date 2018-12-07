@@ -12,7 +12,8 @@ const ProjectList = ({ projects }) => (
         <ProjectSummary
           title={item.title}
           firstName={item.authorFirstName}
-          lastName={item.authorLastName} />
+          lastName={item.authorLastName}
+          createdAt={item.createdAt} />
       </Link>
       )) }
   </div>
