@@ -14,7 +14,7 @@ const Navbar = props => {
       <div className="container">
         <Link
           to="/"
-          className="brand-logo">MarioPlan</Link>
+          className="brand-logo">PerryPlan</Link>
         {links}
       </div>
     </nav>

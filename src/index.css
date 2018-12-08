@@ -6,10 +6,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: url(/img/mario-bg.png) no-repeat;
-  background-size: 100%;
-  background-position: bottom;
+  background: url(https://wallpaperfm.com/img/original/1/8/1/48822.jpg) no-repeat;
+  background-position: center;
   background-color: #95e8f3;
+  background-size: cover;
   min-height: 100%;
 }
 
